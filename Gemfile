@@ -25,6 +25,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise', '~> 3.5.2'
 
+gem 'bootstrap-sass', '~> 3.3.5.1'
+
 gem 'paperclip', '~> 4.3.0'
 
 # Use ActiveModel has_secure_password
