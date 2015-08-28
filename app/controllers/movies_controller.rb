@@ -11,6 +11,14 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
+    @reviews = @movie.reviews.order("created_at DESC")
+    if @reviews.empty?
+      @avg_review = 0
+    else
+      rating = @reviews.map {|x| x.rating}
+      sum = rating.inject{|sum,x| sum+x}
+      @avg_rating = (sum / (rating.count)).round(2)
+    end
   end
 
   # GET /movies/new
@@ -67,7 +75,7 @@ class MoviesController < ApplicationController
     def set_movie
       @movie = Movie.find(params[:id])
     end
-
+   
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
       params.require(:movie).permit(:title, :description, :movie_length, :director, :rating, :image)
